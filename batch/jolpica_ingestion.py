@@ -29,7 +29,7 @@ def fetch_ergast_data(year: int, page: int = 1, limit: int = 30) -> dict:
 def upload_to_s3(data: dict, year: int, race_round: int) -> bool:
     """Uploads JSON to S3 with partitioning."""
     try:
-        key = f"jolpic_ergast_raw/year={year}/race={race_round}/data_{datetime.utcnow().isoformat()}.json"
+        key = f"jolpica_ergast_raw/year={year}/race={race_round}/data_{datetime.utcnow().isoformat()}.json"
         S3_CLIENT.put_object(
             Bucket=S3_BUCKET,
             Key=key,
@@ -68,6 +68,6 @@ def process_year(year: int):
 
 if __name__ == "__main__":
     # Test: Process 2020-2024 seasons
-    for year in [2020, 2021, 2022, 2023, 2024]:
+    for year in [2021, 2022, 2023, 2024]:
         logger.info(f'Starting ingestion for {year}')
         process_year(year)
